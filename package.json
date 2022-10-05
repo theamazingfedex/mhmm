@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@bugsnag/js": "^7.18.0",
     "@bugsnag/plugin-react": "^7.18.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -28,22 +27,22 @@
     "websocket": "^1.0.34"
   },
   "scripts": {
-    "rstart": "react-scripts start",
-    "fileserver": "nodemon ./fs-server/runserver.js",
     "start": "npm run dev",
     "dev": "concurrently \"npm run devWebsocketServer\" \"npm run fileserver\" \"npm run rstart\"",
-    "devWebsocketServer": "nodemon ./startDevWebsocketServer.js",
-    "build": "react-scripts build",
-    "dev-build": "node build",
     "serve": "node serve.js",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "prod-debug": "npm run build && npm run serve",
-    "prod": "npm run build && npm run serve",
     "compile": "node ./compile.js",
+    "dev-build": "node build",
+    "dev-serve": "npm run dev-build && npm run serve",
     "dev-release": "npm run dev-build && npm run compile build",
-    "prod-release": "npm run rbuild && npm run compile build",
-    "clean-release": "npm run compile clean"
+    "prod-build": "react-scripts build",
+    "prod-serve": "npm run prod-build && npm run serve",
+    "prod-release": "npm run prod-build && npm run compile build",
+    "clean-release": "npm run compile clean",
+    "devWebsocketServer": "nodemon ./startDevWebsocketServer.js",
+    "fileserver": "nodemon ./fs-server/runserver.js",
+    "rstart": "react-scripts start",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -64,7 +63,6 @@
     ]
   },
   "devDependencies": {
-    "bugsnag-sourcemaps": "^1.3.0",
     "concurrently": "^7.4.0",
     "http-proxy-middleware": "^2.0.6",
     "nexe": "^4.0.0-rc.1",

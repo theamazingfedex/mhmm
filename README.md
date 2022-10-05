@@ -1,27 +1,36 @@
-# mhmm
-MHMM - Metal: Hellsinger Mod Manager
-___
+# mhmm - Metal: Hellsinger Mod Manager
 A program for managing mods for the game [Metal: Hellsinger](https://www.metalhellsinger.com/modding)
 
 ## Requirements:
-1. create a folder under the Metal: Hellsinger install directory; Example: `J:\SteamLibrary\steamapps\common\Metal Hellsinger\Mods`
-2. download some mods from `https://gamebanana.com/games/17291`
-3. extract the downloaded mods into the `\Mods` folder created in step 1 so that the folder is structed like so:
-  ```
-  /Mods/
-  |- Song Name 1/
-  |-- Song Name 1.bank
-  |-- customsongs.json
-  |- Song Name 2/
-  |-- Song Name 2.bank
-  |-- customsongs.json
-  |...
-  ```
+1. download the relevant executable from the latest version in [Releases](https://github.com/theamazingfedex/mhmm/releases) and save it your Metal: Hellsinger install directory;
+   * Example: `J:\SteamLibrary\steamapps\common\Metal Hellsinger\mhmm-v#.#.#.exe`
+2. create a folder under the Metal: Hellsinger install directory
+   * Example: `J:\SteamLibrary\steamapps\common\Metal Hellsinger\Mods`
+3. download some mods from `https://gamebanana.com/games/17291`
+4. extract the downloaded mods into the `\Mods` folder created in step 1 so that the folder is structed like so:
+   * ```
+     /Mods/
+     |- Song Name 1/
+     |-- Song Name 1.bank
+     |-- customsongs.json
+     |- Song Name 2/
+     |-- Song Name 2.bank
+     |-- customsongs.json
+     |...
+     ```
+5. run the executable and you should see a terminal open, followed by the app opening in your browser.
 
-## Getting Started with Create React App
+
+___
+
+## Getting Started with Development
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Setup
+  * Clone this repo
+  * In the terminal, execute `npm install` from the repository root
+  * In the terminal, execute `npm start` to start the app in development mode running on http://localhost:3000
 ## Available Scripts
 
 In the project directory, you can run:

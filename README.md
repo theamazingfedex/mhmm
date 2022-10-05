@@ -1,4 +1,24 @@
-# Getting Started with Create React App
+# mhmm
+MHMM - Metal: Hellsinger Mod Manager
+___
+A program for managing mods for the game [Metal: Hellsinger](https://www.metalhellsinger.com/modding)
+
+## Requirements:
+1. create a folder under the Metal: Hellsinger install directory; Example: `J:\SteamLibrary\steamapps\common\Metal Hellsinger\Mods`
+2. download some mods from `https://gamebanana.com/games/17291`
+3. extract the downloaded mods into the `\Mods` folder created in step 1 so that the folder is structed like so:
+  ```
+  /Mods/
+  |- Song Name 1/
+  |-- Song Name 1.bank
+  |-- customsongs.json
+  |- Song Name 2/
+  |-- Song Name 2.bank
+  |-- customsongs.json
+  |...
+  ```
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

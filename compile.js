@@ -1,4 +1,5 @@
 const { compile } = require('nexe');
+const { version } = require('./package.json');
 
 const args = process.argv.slice(2);
 compile({
@@ -6,9 +7,9 @@ compile({
   clean: args.includes('clean'),
   build: args.includes('build'),
   bundle: true,
-  output: './release/mhmm',
-  name: 'mhmm',
-  rc: { PRODUCTVERSION: "0.1.1" },
+  output: `./release/mhmm-v${version}`,
+  name: `mhmm-v${version}`,
+  rc: { PRODUCTVERSION: `${version}` },
   targets: ['windows'],
   vcBuild: ['release'],
   verbose: true,

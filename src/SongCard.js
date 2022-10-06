@@ -56,7 +56,7 @@ export default function SongCard({allSongs, setAvailableSongs, setInstalledSongs
     }),
     []
   )
-  const installedClass = songInfo.isInstalled ? ` installed-song` : '';
+  const installedClass = false; //songInfo.isInstalled ? ` installed-song` : '';
   const editSong = useCallback(() => {
     console.log(`Editing song: ${songInfo.LevelName}`);
     window.alert('Editing of songs is not yet implemented.');

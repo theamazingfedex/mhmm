@@ -41,8 +41,7 @@
     "devWebsocketServer": "nodemon ./startDevWebsocketServer.js",
     "fileserver": "nodemon ./fs-server/runserver.js",
     "rstart": "react-scripts start",
-    "test": "CI=false npm run prod-release",
-    "rtest": "react-scripts test",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

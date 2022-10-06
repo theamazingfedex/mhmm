@@ -16,9 +16,9 @@ export default function SongManager({ mods, setlist, setLastSavedSetlist, curGam
   // } else {
   // }
   // console.log('allSongs: ', allSongs)
-  const [songs, setSongs] = useState([]);
-  const [installedSongs, setInstalledSongs] = useState([]);
-  const [availableSongs, setAvailableSongs] = useState([]);
+  const [songs, setSongs] = useState(setlist.concat(mods));
+  const [installedSongs, setInstalledSongs] = useState(setlist);
+  const [availableSongs, setAvailableSongs] = useState(mods);
   const [searchTerm, setSearchTerm] = useState('');
 
   let songSearcher = useMemo(() => new Searcher(availableSongs || [], { keySelector: (obj) => `${get(obj, 'LevelName')}${get(obj, 'MainMusic.Bank')}`}), [availableSongs])
@@ -41,10 +41,12 @@ export default function SongManager({ mods, setlist, setLastSavedSetlist, curGam
     setInstalledSongs(allSongs && allSongs.filter(s => s.isInstalled) || [])
   }, [mods, setlist]);
 
-  useEffect(() => {
-    setAvailableSongs(songs && songs.filter(s => !s.isInstalled) || [])
-    setInstalledSongs(songs && songs.filter(s => s.isInstalled) || [])
-  }, [songs]);
+  // useEffect(() => {
+    
+  //   setAvailableSongs(songs && songs.filter(s => !s.isInstalled) || [])
+  //   setInstalledSongs(songs && songs.filter(s => s.isInstalled) || [])
+  //   // setSongs(installedSongs.concat(availableSongs));
+  // }, [songs]);
 
   useEffect(() => {
     setLastSavedSetlist(installedSongs);
@@ -52,7 +54,12 @@ export default function SongManager({ mods, setlist, setLastSavedSetlist, curGam
 
   const clearSetlist = useCallback(() => {
     setSongs(songs.map(s => ({ ...s, isInstalled: false })))
-  }, [songs]);
+    setAvailableSongs(prevSongs => {
+      const tempSongs = prevSongs.filter(song => !installedSongs.some(iSong => song.MainMusic.Event === iSong.MainMusic.Event && song.BossMusic.Event === iSong.BossMusic.Event));
+      return tempSongs.concat(installedSongs);
+    });
+    setInstalledSongs([]);
+  }, [songs, installedSongs]);
 
   const returnItemsForSetlist =
   // debounce(
@@ -64,10 +71,10 @@ export default function SongManager({ mods, setlist, setLastSavedSetlist, curGam
       !!searchTerm && searchTerm.length > 0 ? searchResult : availableSongs;
 
     return songsToMap.map(item => (
-      <SongCard key={item.LevelName + '-' + item.MainMusic.Event + '-' + item.randomID} songInfo={item} setSongs={setSongs} warningToast={warningToast}/>
+      <SongCard key={item.LevelName + '-' + item.MainMusic.Event + '-' + item.randomID} songInfo={item} allSongs={songs} setInstalledSongs={setInstalledSongs} setAvailableSongs={setAvailableSongs} warningToast={warningToast}/>
     ));
   }
-  , [searchTerm, JSON.stringify(availableSongs)]);
+  , [searchTerm, JSON.stringify(availableSongs), JSON.stringify(songs)]);
   // , 150);
 
   const handleSearchInput = useCallback((e) => {

@@ -60,7 +60,8 @@ export default function SongManager({ mods, setlist, setLastSavedSetlist, curGam
     (isInstalled) => {
     const searchResult = songSearcher.search(searchTerm, availableSongs) || [];
     // console.log('??? search result: ', searchResult, availableSongs);
-    let songsToMap = isInstalled ? installedSongs : !!searchTerm && searchTerm.length > 0 ? searchResult : availableSongs;
+    let songsToMap = isInstalled ? installedSongs :
+      !!searchTerm && searchTerm.length > 0 ? searchResult : availableSongs;
 
     return songsToMap.map(item => (
       <SongCard key={item.LevelName + '-' + item.MainMusic.Event + '-' + item.randomID} songInfo={item} setSongs={setSongs} warningToast={warningToast}/>

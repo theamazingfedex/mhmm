@@ -155,6 +155,7 @@ div, p, button, span {
   border-radius: 10px;
   height: 100%;
   padding: 1em;
+  /* max-width:25%; */
 }
 .setlist > .draggable-song {
   flex-grow: 0;
@@ -181,6 +182,7 @@ div, p, button, span {
   background-repeat: no-repeat;
   background-size: 100%;
   height: 5.5em;
+  background-position: center center;
 }
 .draggable-song > p {
   margin: 0 auto;

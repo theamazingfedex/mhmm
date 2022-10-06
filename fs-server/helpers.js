@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 
-const IS_DEBUGGING = process.argv.slice(2).includes('debug') || process.env.DEBUG || true;
+const IS_DEBUGGING = process.argv.slice(2).includes('debug') || process.env.DEBUG;
 function debugLog(...message) {
   if (IS_DEBUGGING) {
     console.log(new Date().toISOString(), ...message);

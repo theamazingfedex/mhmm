@@ -10,6 +10,7 @@ compile({
   name: 'mhmm',
   rc: { PRODUCTVERSION: "0.1.1" },
   targets: ['windows'],
+  vcBuild: ['release'],
   verbose: true,
   // targets: ['windows-x64-14.15.3', 'windows-x86-14.15.3'],
   temp: "./.nexe",

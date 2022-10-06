@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - 16
+os:
+  - windows
+dist: precise
+# before_deploy:
+#   - mv ./release/mhmm.exe ./release/mhmm-v
+
+# deploy:
+#   provider: releases
+#   api_key: "GITHUB OAUTH TOKEN"
+#   file: "./release/mhmm.exe"
+#   skip_cleanup: true
+#   on:
+#     tags: true

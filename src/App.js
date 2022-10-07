@@ -203,9 +203,10 @@ function App() {
           <img src={mhsLogo} className="logo" alt="Metal: Hellsinger" />
           <div className="content-wrapper">
             {needsUpdate && (
-              <div className="update-required-banner" onClick={`location.href='${githubReleasesUrl}'`} style={{cursor: 'pointer'}} title="Download latest version">
+              <div className="update-required-banner" onClick={() => {window.location.href='https://github.com/theamazingfedex/mhmm/releases'}} style={{cursor: 'pointer'}} title="Download latest version">
                 UPDATE AVAILABLE &nbsp;-&nbsp;
-                <a href={githubReleasesUrl}>Click HERE to go to latest releases</a>
+                <a href="https://github.com/theamazingfedex/mhmm/releases">Click HERE to go to latest releases</a>
+                <span className="dismiss-update" title="Dismiss" onClick={(e) => {setNeedsUpdate(false); e.stopPropagation();}}>&nbsp;x&nbsp;</span>
               </div>
               )}
             {!!curGameDirectory ? (

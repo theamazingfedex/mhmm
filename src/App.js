@@ -218,7 +218,7 @@ function App() {
                 <p>
                   Choose your Metal: Hellsinger installation directory:
                 </p>
-                <input onChange={handleInput} placeholder="e.x. C:\SteamLibrary\steamapps\common\Metal Hellsinger"/>
+                <input className="install-dir-input" onChange={handleInput} placeholder="e.x. C:\SteamLibrary\steamapps\common\Metal Hellsinger"/>
                 <button className="btn btn-background" onClick={() => {setCurGameDirectory(installDirInput); setInstallDirInput(undefined); setIsLoading(false);}}>Load Game Directory</button>
               </div>
             )}

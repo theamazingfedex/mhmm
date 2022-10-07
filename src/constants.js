@@ -1,5 +1,6 @@
-export const levelNamesArr = ['Voke', 'Stygia', 'Incaustis', 'Yhelm', 'Gehenna', 'Nihil', 'Acheron', 'Sheol'];
+export const levelNamesArr = ['Tutorial', 'Voke', 'Stygia', 'Incaustis', 'Yhelm', 'Gehenna', 'Nihil', 'Acheron', 'Sheol'];
 export const GameTracks = {
+  Tutorial: 'Tutorial',
   Voke: 'Voke',
   Stygia: 'Stygia',
   Incaustis: 'Incaustis',

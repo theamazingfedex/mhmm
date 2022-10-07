@@ -120,7 +120,7 @@ const getFilenamesFromDir = (dirPath, extFilters) => {
             return level;
           });
         }
-        console.log('!!!FindFiles returns: ', JSON.stringify(customsongdata, null, 2))
+        // console.log('!!!FindFiles returns: ', JSON.stringify(customsongdata, null, 2))
         if (customsongdata.customLevelMusic.length > 0) {
           filesToReturn.push({ filename, customsongsjson: JSON.stringify(customsongdata)});
         }

@@ -9,8 +9,8 @@ export default function SongCard({allSongs, setAvailableSongs, setInstalledSongs
     if (shouldInstall) {
       let didInstall = false;
       setInstalledSongs(prevSongs => {
-        const tempSongs = prevSongs.filter(song => song.MainMusic.Event !== currentItem.name && song.BossMusic.Event !== currentItem.name);
-        const currentSong = allSongs.find(song => song.MainMusic.Event === currentItem.name && song.BossMusic.Event === currentItem.name);
+        const tempSongs = prevSongs.filter(song => song.MainMusic.Event !== currentItem.name && song.BossMusic.Event !== currentItem.bossname);
+        const currentSong = allSongs.find(song => song.MainMusic.Event === currentItem.name && song.BossMusic.Event === currentItem.bossname);
         if (!!currentSong) {
           tempSongs.push({...currentSong, isInstalled: true});
           didInstall = true;
@@ -18,14 +18,14 @@ export default function SongCard({allSongs, setAvailableSongs, setInstalledSongs
         return tempSongs
       });
       if (didInstall) {
-        setAvailableSongs(prevSongs => prevSongs.filter(prevSong => prevSong.MainMusic.Event !== currentItem.name && prevSong.BossMusic.Event !== currentItem.name));
+        setAvailableSongs(prevSongs => prevSongs.filter(prevSong => prevSong.MainMusic.Event !== currentItem.name && prevSong.BossMusic.Event !== currentItem.bossname));
       }
     } else {
       // should uninstall
       let didUninstall = false;
       setAvailableSongs(prevSongs => {
-        const tempSongs = prevSongs.filter(song => song.MainMusic.Event !== currentItem.name && song.BossMusic.Event !== currentItem.name);
-        const currentSong = allSongs.find(song => song.MainMusic.Event === currentItem.name && song.BossMusic.Event === currentItem.name);
+        const tempSongs = prevSongs.filter(song => song.MainMusic.Event !== currentItem.name && song.BossMusic.Event !== currentItem.bossname);
+        const currentSong = allSongs.find(song => song.MainMusic.Event === currentItem.name && song.BossMusic.Event === currentItem.bossname);
         if (!!currentSong) {
           tempSongs.push({...currentSong, isInstalled: false});
           didUninstall = true;
@@ -33,7 +33,7 @@ export default function SongCard({allSongs, setAvailableSongs, setInstalledSongs
         return tempSongs
       });
       if (didUninstall) {
-        setInstalledSongs(prevSongs => prevSongs.filter(prevSong => prevSong.MainMusic.Event !== currentItem.name && prevSong.BossMusic.Event !== currentItem.name));
+        setInstalledSongs(prevSongs => prevSongs.filter(prevSong => prevSong.MainMusic.Event !== currentItem.name && prevSong.BossMusic.Event !== currentItem.bossname));
       }
     }
   }
@@ -41,7 +41,7 @@ export default function SongCard({allSongs, setAvailableSongs, setInstalledSongs
   const [{ isDragging }, dragRef] = useDrag(
     () => ({
       type: songInfo.LevelName,
-      item: { name: songInfo.MainMusic.Event, type: songInfo.LevelName, randomID: songInfo.randomID },
+      item: { name: songInfo.MainMusic.Event, bossname: songInfo.BossMusic.Event, type: songInfo.LevelName, randomID: songInfo.randomID },
       collect: (monitor) => ({
         isDragging: !!monitor.isDragging()
       }),

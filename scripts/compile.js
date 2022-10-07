@@ -1,5 +1,5 @@
 const { compile } = require('nexe');
-const packageJson = require('./package.json');
+const packageJson = require('../package.json');
 const fs = require('fs');
 const version = packageJson.version;
 
@@ -12,9 +12,10 @@ if (args.includes('patch')) { patch = Number(patch) + 1; extra = ''; }
 if (args.includes('beta')) { extra = '-beta' }
 if (args.includes('alpha')) { extra = '-alpha' }
 const newVersion = `${major}.${minor}.${patch}${extra}`;
+console.log('newVersion: ', newVersion);
 
 compile({
-  input: './serve.js',
+  input: './scripts/serve.js',
   clean: args.includes('clean'),
   build: args.includes('build'),
   bundle: true,

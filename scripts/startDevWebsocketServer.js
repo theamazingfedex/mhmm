@@ -1,6 +1,6 @@
 const WebSocketServer = require('websocket').server;
 const http = require('http');
-const { debugLog } = require('./fs-server/helpers');
+const { debugLog } = require('../fs-server/helpers');
 
 function createServer() {
   const server = http.createServer((request, response) => { });

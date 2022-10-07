@@ -1,8 +1,8 @@
 const serveHandler = require("serve-handler");
 const WebSocketServer = require('websocket').server;
 const http = require('http');
-const MhmmFileserver = require('./fs-server/index');
-const { debugLog } = require('./fs-server/helpers');
+const MhmmFileserver = require('../fs-server/index');
+const { debugLog } = require('../fs-server/helpers');
 const open = require('open');
 
 function MhmmServer() {

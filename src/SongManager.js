@@ -21,7 +21,7 @@ export default function SongManager({ mods, setlist, setLastSavedSetlist, curGam
   const [availableSongs, setAvailableSongs] = useState(mods);
   const [searchTerm, setSearchTerm] = useState('');
 
-  let songSearcher = useMemo(() => new Searcher(availableSongs || [], { keySelector: (obj) => `${get(obj, 'LevelName')}${get(obj, 'MainMusic.Bank')}`}), [availableSongs])
+  let songSearcher = useMemo(() => new Searcher(availableSongs || [], { keySelector: (obj) => `${get(obj, 'LevelName')}${get(obj, 'MainMusic.Bank')}${get(obj, 'MainMusic.BPM')}`}), [availableSongs])
 
   // const updateSongs = (newSongs) => {
   //   const installedSongs = newSongs(songs).filter(s => s.isInstalled);
@@ -65,16 +65,16 @@ export default function SongManager({ mods, setlist, setLastSavedSetlist, curGam
   // debounce(
     useCallback(
     (isInstalled) => {
-    const searchResult = songSearcher.search(searchTerm, availableSongs) || [];
+    // const searchResult = 
     // console.log('??? search result: ', searchResult, availableSongs);
     let songsToMap = isInstalled ? installedSongs :
-      !!searchTerm && searchTerm.length > 0 ? searchResult : availableSongs;
+      !!searchTerm && searchTerm.length > 0 ? (songSearcher.search(searchTerm, availableSongs) || []) : availableSongs;
 
     return songsToMap.map(item => (
-      <SongCard key={item.LevelName + '-' + item.MainMusic.Event + '-' + item.randomID} songInfo={item} allSongs={songs} setInstalledSongs={setInstalledSongs} setAvailableSongs={setAvailableSongs} warningToast={warningToast}/>
+      <SongCard key={item.LevelName + '-' + item.MainMusic.Event + '-' + item.randomID} songInfo={item} allSongs={songs} setInstalledSongs={setInstalledSongs} setAvailableSongs={setAvailableSongs} />
     ));
   }
-  , [searchTerm, JSON.stringify(availableSongs), JSON.stringify(songs)]);
+  , [searchTerm, JSON.stringify(availableSongs), JSON.stringify(installedSongs), JSON.stringify(songs)]);
   // , 150);
 
   const handleSearchInput = useCallback((e) => {

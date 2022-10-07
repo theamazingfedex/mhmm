@@ -22,7 +22,6 @@ export default function SongCard({allSongs, setAvailableSongs, setInstalledSongs
       }
     } else {
       // should uninstall
-      let didUninstall = false;
       setAvailableSongs(prevSongs => {
         const songAlreadyAvailable = prevSongs.some(song => song.MainMusic.Event !== currentItem.name && song.BossMusic.Event !== currentItem.bossname);
         const tempSongs = [...prevSongs];
@@ -30,14 +29,11 @@ export default function SongCard({allSongs, setAvailableSongs, setInstalledSongs
           const currentSong = allSongs.find(song => song.MainMusic.Event === currentItem.name && song.BossMusic.Event === currentItem.bossname);
           if (!currentSong) {
             tempSongs.push({...currentSong, isInstalled: false});
-            didUninstall = true;
           }
         }
         return tempSongs
       });
-      if (didUninstall) {
-        setInstalledSongs(prevSongs => prevSongs.filter(prevSong => prevSong.MainMusic.Event !== currentItem.name && prevSong.BossMusic.Event !== currentItem.bossname));
-      }
+      setInstalledSongs(prevSongs => prevSongs.filter(prevSong => prevSong.MainMusic.Event !== currentItem.name && prevSong.BossMusic.Event !== currentItem.bossname));
     }
   }
 

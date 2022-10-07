@@ -56,7 +56,7 @@ export default function SongCard({allSongs, setAvailableSongs, setInstalledSongs
     }),
     []
   )
-  const installedClass = false; //songInfo.isInstalled ? ` installed-song` : '';
+  const installedClass = songInfo.isInstalled ? ` installed-song` : '';
   const editSong = useCallback(() => {
     console.log(`Editing song: ${songInfo.LevelName}`);
     window.alert('Editing of songs is not yet implemented.');
@@ -66,7 +66,7 @@ export default function SongCard({allSongs, setAvailableSongs, setInstalledSongs
     <div title={JSON.stringify(songInfo, null, 2)} ref={dragRef} visible={isDragging ? 'hidden' : 'visible'} hidden={isDragging} className={`draggable-song ${songInfo.LevelName.toLowerCase()}-background` + installedClass}>
       {/* <p>Level: {songInfo.LevelName}</p> */}
       <p className="bank-name">{songInfo.MainMusic.Bank}</p>
-      {songInfo.isInstalled && <span className='edit-cog' title='Edit Song' onClick={editSong}>⚙</span>}
+      {false && songInfo.isInstalled && <span className='edit-cog' title='Edit Song' onClick={editSong}>⚙</span>}
       <p className="bpm">{songInfo.MainMusic.BPM} BPM</p>
       {/* {JSON.stringify(songInfo)} */}
     </div>

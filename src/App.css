@@ -249,9 +249,10 @@ input[type=search]::-webkit-search-cancel-button {
 .draggable-song:hover,
 .draggable-song:active {
   filter: brightness(150%);
-  margin-top: -2px;
+  margin-top: -0.2em;
+  margin-bottom: 0.5em;
   box-shadow: none;
-  box-shadow: rgba(0,0,0, 0.3) 5px 5px 10px 5px;
+  box-shadow: rgba(230,130,0, 0.3) 5px 5px 10px 5px;
 }
 .modlist > .draggable-song {
   background-color: red;

@@ -193,6 +193,9 @@ div, p, button, span {
   width: 100%;
   /* flex-grow: 1; */
 }
+.draggable-song:hover {
+  filter: brightness(150%);
+}
 .modlist > .draggable-song {
   background-color: red;
   background-image: url('../public/song-background.png');
@@ -245,6 +248,15 @@ div, p, button, span {
 }
 .toast {
   z-index: 99999 !important;
+}
+
+.update-required-banner {
+  background-color: red;
+  /* position: absolute; */
+  width: 100%;
+  margin: 0 auto;
+  padding: 1em;
+  border-radius: 5px;
 }
 
 

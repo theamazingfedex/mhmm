@@ -10,11 +10,14 @@ import RawCustomsongsjson from './RawCustomsongsjson';
 import loadingGif from './loading.gif';
 import mhsLogo from './metalhellsinger-mm-logo-2022.png';
 import mhsIcon from './mhs-icon.png';
+// import { version } from '../package.json';
+const version = require('../package.json').version;
 // const loadingGif = 'http://localhost:3000/public/loading.gif';
 
 const uuid = require('uuid').v4;
 
 const levelNames = ['Voke', 'Stygia', 'Incaustis', 'Yhelm', 'Gehenna', 'Nihil', 'Acheron', 'Sheol'];
+const githubReleasesUrl = 'https://api.github.com/repos/theamazingfedex/mhmm/releases/latest';
 const toastTimeout = 5000;
 const toastDebounce = 150;
 const initialState = {
@@ -24,6 +27,21 @@ const initialState = {
   setlist: [],
 };
 const normalizePath = path => path.replace(/[\\/]+/g, '/');
+
+let needsToUpdatePromise =
+  fetch(githubReleasesUrl, { method: 'GET', headers: { Accept: 'application/vnd.github+json' }})
+    .then((res) => {
+      return res.json().then(latestRelease => {
+        // console.log('latestReleases: ', latestRelease);
+        const latestVersion = latestRelease.tag_name.split('-')[0];
+        const needsToUpdate = latestVersion.slice(1) !== version
+        console.log(`Latest Version: ${latestVersion}`);
+        console.log(`Current Version: v${version}`);
+        console.log('needs to update?: ', needsToUpdate)
+        return needsToUpdate;
+      }).catch(e => console.log('ERROR: ', e));
+    })
+    .catch(e => console.log('ERROR: ', e));
 
 function App() {
 // class App extends Component {
@@ -35,9 +53,18 @@ function App() {
   const [mods, setAvailableMods] = useState(initialState.mods);
   const [curGameDirectory, setCurGameDirectory] = useState(localStorage.getItem('curGameDirectory') || initialState.curGameDirectory);
   const [setlist, setSetlist] = useState(initialState.setlist)
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [lastSavedSetlist, setLastSavedSetlist] = useState(JSON.parse(localStorage.getItem('lastSavedSetlist') || '[]') || []);
   const [isExportOpen, setIsExportOpen] = useState(false);
+  const [needsUpdate, setNeedsUpdate] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const value = await needsToUpdatePromise;
+      console.log('needs update??? ', value);
+      setNeedsUpdate(value);
+    })();
+  }, []);
 
   // const reloadLastSavedSetlist = useCallback(() => {
   //   setLastSavedSetlist(JSON.parse(localStorage.getItem('lastSavedSetlist') || '{}'));
@@ -175,6 +202,12 @@ function App() {
       <div className="App">
           <img src={mhsLogo} className="logo" alt="Metal: Hellsinger" />
           <div className="content-wrapper">
+            {needsUpdate && (
+              <div className="update-required-banner" onClick={`location.href='${githubReleasesUrl}'`} style={{cursor: 'pointer'}} title="Download latest version">
+                UPDATE AVAILABLE &nbsp;-&nbsp;
+                <a href={githubReleasesUrl}>Click HERE to go to latest releases</a>
+              </div>
+              )}
             {!!curGameDirectory ? (
               <div>
                 <p>Current Game Directory:  </p>

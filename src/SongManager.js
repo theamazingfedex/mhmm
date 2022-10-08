@@ -53,13 +53,15 @@ export default function SongManager({ mods, setlist, setLastSavedSetlist, curGam
   }, [installedSongs])
 
   const clearSetlist = useCallback(() => {
-    setSongs(songs.map(s => ({ ...s, isInstalled: false })))
-    setAvailableSongs(prevSongs => {
-      const tempSongs = prevSongs.filter(song => !installedSongs.some(iSong => song.MainMusic.Event === iSong.MainMusic.Event && song.BossMusic.Event === iSong.BossMusic.Event));
-      return tempSongs.concat(installedSongs);
-    });
+    const uninstalledSongs = songs.map(s => ({ ...s, isInstalled: false }));
+    setSongs(uninstalledSongs);
+    setAvailableSongs(uninstalledSongs);
     setInstalledSongs([]);
-  }, [songs, installedSongs]);
+    // setAvailableSongs(prevSongs => {
+    //   const tempSongs = prevSongs.filter(song => !installedSongs.some(iSong => song.MainMusic.Event === iSong.MainMusic.Event && song.BossMusic.Event === iSong.BossMusic.Event));
+    //   return tempSongs.concat(installedSongs);
+    // });
+  }, [songs]);
 
   const returnItemsForSetlist =
   // debounce(

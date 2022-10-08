@@ -13,6 +13,9 @@ if (args.includes('beta')) { extra = '-beta' }
 if (args.includes('alpha')) { extra = '-alpha' }
 const newVersion = `${major}.${minor}.${patch}${extra}`;
 console.log('newVersion: ', newVersion);
+if (version !== newVersion) {
+  fs.writeFileSync('./package.json', JSON.stringify({...packageJson, version: newVersion}, null, 2));
+}
 
 compile({
   input: './scripts/serve.js',
@@ -32,9 +35,6 @@ compile({
   ],
 }).then(() => {
   console.log('compilation successful');
-  if (version !== newVersion) {
-    fs.writeFileSync('./package.json', JSON.stringify({...packageJson, version: newVersion}, null, 2));
-  }
 }).catch(err => {
   console.error('compilation err: ', err);
 })

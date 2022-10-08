@@ -1,5 +1,6 @@
 # mhmm - Metal: Hellsinger Mod Manager
 A program for managing mods for the game [Metal: Hellsinger](https://www.metalhellsinger.com/modding)
+ - Setup tutorial by Bikeborb: https://youtu.be/CTtDwxt93h8
 
 ## Requirements:
 1. download the relevant executable from the latest version in [Releases](https://github.com/theamazingfedex/mhmm/releases) and save it your Metal: Hellsinger install directory;

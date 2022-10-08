@@ -61,7 +61,7 @@ function App() {
   useEffect(() => {
     (async () => {
       const value = await needsToUpdatePromise;
-      console.log('needs update??? ', value);
+      // console.log('needs update??? ', value);
       setNeedsUpdate(value);
     })();
   }, []);

@@ -33,8 +33,27 @@ let needsToUpdatePromise =
     .then((res) => {
       return res.json().then(latestRelease => {
         // console.log('latestReleases: ', latestRelease);
+        let needsToUpdate = false;
         const latestVersion = latestRelease.tag_name.split('-')[0];
-        const needsToUpdate = latestVersion.slice(1) !== version.split('-')[0];
+
+        let latestExtra = '';
+        const [latestMajor, latestMinor, latestPatch] = latestVersion.split('.');
+        [latestPatch, latestExtra = ''] = latestPatch.split('-');
+
+        let curExtra = '';
+        const [curMajor, curMinor, curPatch] = version.split('.');
+        [curPatch, curExtra = ''] = curPatch.split('-');
+
+        if (Number(latestMajor) > Number(curMajor)) {
+          needsToUpdate = true;
+        } else if (Number(latestMinor) > Number(curMinor)) {
+          needsToUpdate = true;
+        } else if (Number(latestPatch) > Number(curPatch)) {
+          needsToUpdate = true;
+        } else if (latestExtra.length < curExtra.length) {
+          needsToUpdate = true;
+        }
+
         console.log(`Latest Version: ${latestVersion}`);
         console.log(`Current Version: v${version}`);
         console.log('Needs to update?: ', needsToUpdate)

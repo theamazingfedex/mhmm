@@ -1,6 +1,6 @@
 {
   "name": "mhmm-web",
-  "version": "0.1.10",
+  "version": "0.2.0-alpha",
   "private": true,
   "dependencies": {
     "@bugsnag/plugin-react": "^7.18.0",

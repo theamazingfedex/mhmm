@@ -34,7 +34,7 @@ let needsToUpdatePromise =
       return res.json().then(latestRelease => {
         // console.log('latestReleases: ', latestRelease);
         const latestVersion = latestRelease.tag_name.split('-')[0];
-        const needsToUpdate = latestVersion.slice(1) !== version
+        const needsToUpdate = latestVersion.slice(1) !== version.split('-')[0];
         console.log(`Latest Version: ${latestVersion}`);
         console.log(`Current Version: v${version}`);
         console.log('Needs to update?: ', needsToUpdate)

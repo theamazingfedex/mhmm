@@ -36,6 +36,7 @@
     "dev-release": "npm run dev-build && npm run compile build",
     "prod-build": "react-scripts build",
     "prod-serve": "npm run prod-build && npm run serve",
+    "update-version": "node ./scripts/update-version.js",
     "prod-release": "npm run prod-build && npm run compile build",
     "clean-release": "npm run compile clean",
     "devWebsocketServer": "nodemon ./scripts/startDevWebsocketServer.js",

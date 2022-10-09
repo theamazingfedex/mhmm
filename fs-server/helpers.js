@@ -109,27 +109,26 @@ const getFilenamesFromDir = (dirPath, extFilters) => {
 
     // } else if (filename.endsWith('.bank') || filename.endsWith('customsongs.json')) {
     } else if (filename.endsWith('.bank')) {
-      // try {
-        let customsongdata = getCustomsongData(dirPath);
-        if (customsongdata.customLevelMusic && customsongdata.customLevelMusic.length > 0) {
+      let customsongdata = getCustomsongData(dirPath);
+      if (customsongdata.customLevelMusic && customsongdata.customLevelMusic.length > 0
+        && customsongdata.customLevelMusic[0].LevelName
+        && customsongdata.customLevelMusic[0].MainMusic
+        && customsongdata.customLevelMusic[0].MainMusic.Bank
+        && customsongdata.customLevelMusic[0].MainMusic.Event
+        && customsongdata.customLevelMusic[0].MainMusic.LowHealthBeatEvent
+        && customsongdata.customLevelMusic[0].MainMusic.BeatInputOffset
+        && customsongdata.customLevelMusic[0].MainMusic.BPM
+        ) {
 
-          customsongdata.customLevelMusic = customsongdata.customLevelMusic.map(level => {
-            level.MainMusic.bankPath = path.join(dirPath, level.MainMusic.Bank + '.bank');
-            level.BossMusic.bankPath = path.join(dirPath, level.BossMusic.Bank + '.bank');
-            level.isInstalled = false;
-            return level;
-          });
-        }
-        // console.log('!!!FindFiles returns: ', JSON.stringify(customsongdata, null, 2))
-        if (customsongdata.customLevelMusic.length > 0) {
-          filesToReturn.push({ filename, customsongsjson: JSON.stringify(customsongdata)});
-        }
-        // filesToReturn.push(customsongdata);
+        customsongdata.customLevelMusic = customsongdata.customLevelMusic.map(level => {
+          level.MainMusic.bankPath = path.join(dirPath, level.MainMusic.Bank + '.bank');
+          level.BossMusic.bankPath = path.join(dirPath, level.BossMusic.Bank + '.bank');
+          level.isInstalled = false;
+          return level;
+        });
 
-      // }catch(e) {
-      // console.log('!!!ERROR: ', e);
-      // }
-      // console.log('pushing: ', filename);
+        filesToReturn.push({ filename, customsongsjson: JSON.stringify(customsongdata)});
+      }
     };
   };
 

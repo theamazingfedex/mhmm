@@ -88,7 +88,7 @@ export default function SongManager({ mods, setlist, setLastSavedSetlist, curGam
         <div className="available-mods">
             <div className="header mods-header">
               <p>Mods Folder:</p>
-              <p>{curGameDirectory.includes('/') ? curGameDirectory + '/Mods' : curGameDirectory +'\\Mods'}</p>
+              <p>{curGameDirectory && curGameDirectory.includes('/') ? curGameDirectory + '/Mods' : curGameDirectory +'\\Mods'}</p>
               <div className="title mods-title"><DebounceInput minLength={2} debounceTimeout={300} type="search" onChange={handleSearchInput} placeholder="Search Mods: e.x. Stygia, Du Hast, etc..."/></div>
             </div>
             <DropTarget title='modlist' className='modlist'>

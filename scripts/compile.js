@@ -1,15 +1,16 @@
 const { compile } = require('nexe');
-const packageJson = require('../package.json');
-const newVersion = packageJson.version;
+const { version } = require('../package.json');
+
+const args = process.argv.slice(2);
 
 compile({
   input: './scripts/serve.js',
   clean: args.includes('clean'),
   build: args.includes('build'),
   bundle: true,
-  output: `./release/mhmm-v${newVersion}`,
-  name: `mhmm-v${newVersion}`,
-  rc: { PRODUCTVERSION: `${newVersion}` },
+  output: `./release/mhmm-v${version}`,
+  name: `mhmm-v${version}`,
+  rc: { PRODUCTVERSION: `${version}` },
   targets: ['windows'],
   vcBuild: ['release'],
   verbose: true,

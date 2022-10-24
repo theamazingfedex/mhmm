@@ -1,4 +1,6 @@
+[![Github Current Release](https://img.shields.io/github/v/release/theamazingfedex/mhmm?label=version)]()
 [![Github All Releases](https://img.shields.io/github/downloads/theamazingfedex/mhmm/total.svg)]()
+[![Github Last Release](https://img.shields.io/github/release-date/theamazingfedex/mhmm?label=last%20release)]()
 # mhmm - Metal: Hellsinger Mod Manager
 A program for managing mods for the game [Metal: Hellsinger](https://www.metalhellsinger.com/modding)
  - Setup tutorial by Bikeborb: https://youtu.be/CTtDwxt93h8

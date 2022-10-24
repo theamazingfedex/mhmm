@@ -1,3 +1,4 @@
+[![Github All Releases](https://img.shields.io/github/downloads/theamazingfedex/mhmm/total.svg)]()
 # mhmm - Metal: Hellsinger Mod Manager
 A program for managing mods for the game [Metal: Hellsinger](https://www.metalhellsinger.com/modding)
  - Setup tutorial by Bikeborb: https://youtu.be/CTtDwxt93h8

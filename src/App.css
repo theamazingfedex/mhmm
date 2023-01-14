@@ -179,7 +179,6 @@ input[type=search]::-webkit-search-cancel-button {
 
   background-color: rgba(0,0,0,0.25);
   padding: 1em;
-  /* padding-right: 25px; */
   border-radius: 10px;
 }
 .setlist {
@@ -284,30 +283,57 @@ input[type=search]::-webkit-search-cancel-button {
 .tutorial-background {
   background-image: url('../public/tutorial-background.png') !important;
   background-position: center top 36%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
 }
 .voke-background {
   background-image: url('../public/voke-background.png') !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 .stygia-background {
   background-image: url('../public/stygia-background.png') !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 .incaustis-background {
   background-image: url('../public/incaustis-background.png') !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 .yhelm-background {
   background-image: url('../public/yhelm-background.png') !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 .gehenna-background {
   background-image: url('../public/gehenna-background.png') !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 .nihil-background {
   background-image: url('../public/nihil-background.png') !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 .acheron-background {
   background-image: url('../public/acheron-background.png') !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 .sheol-background {
   background-image: url('../public/sheol-background.png') !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 .toast {
   z-index: 99999 !important;
@@ -432,6 +458,12 @@ input[type=search]::-webkit-search-cancel-button {
   /* background-color: #282c34 !important; */
   height: 70vh !important;
 }
+.modal-content > .clear-btn {
+  position: fixed;
+  right: 4em;
+  top: 4em;
+  float: right;
+}
 .export-drawer > .clear-btn {
   position: fixed;
   right: 0.5em;
@@ -498,6 +530,117 @@ input[type=search]::-webkit-search-cancel-button {
 }
 .customsongsjson-wrapper {
   min-width: 50%;
+}
+.ReactModal__Overlay--after-open {
+  background-color: rgba(10,10,10,0.7) !important;
+}
+.ReactModal__Content--after-open {
+  background-color: rgba(200,200,200,0.9) !important;
+  background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(40,44,52,1) 45%, rgba(40,44,52,1) 90%, rgba(42,14,14,1) 100%) !important;
+  outline: none !important;
+  border-color: transparent !important;
+  box-shadow: #111 0 20px 15px 0 !important;
+  border-radius: 10px !important;
+}
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  height: fill;
+  justify-content: center;
+  align-items: center;
+
+  /* height: fill; */
+  background-color: rgba(0,0,0,0.25);
+  padding: 1em;
+  border-radius: 10px;
+  color: #ecead9;
+}
+.modal-editor {
+  /* margin-top: 200px; */
+  /* flex: 1 0 auto; */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.modal-buttons {
+  /* flex-shrink: 0; */
+  /* margin-top: auto; */
+  /* justify-self: flex-end !important; */
+  min-width: 30%;
+  width: 30%;
+  text-align: center;
+  /* justify-self: flex-end; */
+}
+.modal-buttons > .btn {
+  margin-top: 1em;
+}
+.editor-input {
+  color: #ecead9;
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  width: 11em;
+  box-shadow: none !important;
+  outline: none;
+  border-color: transparent;
+  /* box-shadow: #555 -2px 2px 2px 0; */
+}
+.editor-input:hover {
+  cursor: pointer;
+  filter: brightness(130%);
+  border-color:rgba(70,20,20,0.8);
+  box-shadow: #555 -2px 2px 2px 0;
+}
+.song-editor-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 30em;
+  /* max-width: 25%; */
+  /* padding-top: 1em; */
+  padding: 1em 0 1em 1em;
+  border-top: 4px solid rgba(70,20,20,0.8);
+  margin-bottom: 1em;
+  vertical-align: middle;
+  line-height: 0;
+
+  background-color: rgba(0,0,0,0.8);
+  border-radius: 15px;
+}
+.right-arrow-green {
+  color: green;
+  font-weight: bold;
+  font-size: 2em;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 0;
+  margin-left: auto;
+  margin-right: 1.5em;
+  /* margin: 0 auto; */
+  top: -10px;
+}
+.levelName-editor {
+  width: 100%;
+}
+.levelName-label {
+
+}
+.levelName-input {
+
+}
+.offset-editor {
+  width: 100%;
+}
+.offset-label {
+
+}
+.offset-input {
+
 }
 /* button {
   color: #ecead9;

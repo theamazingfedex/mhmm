@@ -10,7 +10,7 @@ import SongCard from './SongCard';
 
 
 
-export default function SongManager({ mods, setlist, setLastSavedSetlist, curGameDirectory, warningToast}) {
+export default function SongManager({ mods, setlist, setLastSavedSetlist, curGameDirectory, warningToast, showEditSuccessToast}) {
   // if (savedSetlist && Object.keys(savedSetlist).length > 0) {
   //   allSongs = savedSetlist;
   // } else {
@@ -53,9 +53,25 @@ export default function SongManager({ mods, setlist, setLastSavedSetlist, curGam
   }, [installedSongs])
 
   const clearSetlist = useCallback(() => {
-    const uninstalledSongs = songs.map(s => ({ ...s, isInstalled: false }));
-    setSongs(uninstalledSongs);
-    setAvailableSongs(uninstalledSongs);
+    // const uninstalledSongs = songs.map(s => ({ ...s, isInstalled: false }));
+
+    setAvailableSongs(prevSongs =>
+      prevSongs.filter(prevSong => !songs.includes(s => s.MainMusic.Event === prevSong.MainMusic.Event && s.BossMusic.Event === prevSong.BossMusic.Event))
+    );
+    // setAvailableSongs(prevSongs => {
+    //   const songAlreadyAvailable = prevSongs.some(song => song.MainMusic.Event !== currentItem.MainMusic.Event && song.BossMusic.Event !== currentItem.BossMusic.Event);
+    //   const tempSongs = [...prevSongs];
+    //   if (songAlreadyAvailable) {
+    //     const currentSong = allSongs.find(song => song.MainMusic.Event === currentItem.MainMusic.Event && song.BossMusic.Event === currentItem.BossMusic.Event);
+    //     if (!currentSong) {
+    //       tempSongs.push({...currentSong, isInstalled: false});
+    //     }
+    //   }
+    //   return tempSongs
+    // });
+    // setInstalledSongs(prevSongs => prevSongs.filter(prevSong => prevSong.MainMusic.Event !== currentItem.name && prevSong.BossMusic.Event !== currentItem.bossname));
+    // setSongs(uninstalledSongs);
+    // setAvailableSongs(uninstalledSongs);
     setInstalledSongs([]);
     // setAvailableSongs(prevSongs => {
     //   const tempSongs = prevSongs.filter(song => !installedSongs.some(iSong => song.MainMusic.Event === iSong.MainMusic.Event && song.BossMusic.Event === iSong.BossMusic.Event));
@@ -73,7 +89,7 @@ export default function SongManager({ mods, setlist, setLastSavedSetlist, curGam
       !!searchTerm && searchTerm.length > 0 ? (songSearcher.search(searchTerm, availableSongs) || []) : availableSongs;
 
     return songsToMap.map(item => (
-      <SongCard key={item.LevelName + '-' + item.MainMusic.Event + '-' + item.randomID} songInfo={item} allSongs={songs} setInstalledSongs={setInstalledSongs} setAvailableSongs={setAvailableSongs} />
+      <SongCard key={item.LevelName + '-' + item.MainMusic.Event + '-' + item.randomID} songInfo={item} allSongs={songs} setInstalledSongs={setInstalledSongs} setAvailableSongs={setAvailableSongs} showEditSuccessToast={showEditSuccessToast}/>
     ));
   }
   , [searchTerm, JSON.stringify(availableSongs), JSON.stringify(installedSongs), JSON.stringify(songs)]);

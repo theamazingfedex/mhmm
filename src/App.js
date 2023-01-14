@@ -33,11 +33,30 @@ let needsToUpdatePromise =
     .then((res) => {
       return res.json().then(latestRelease => {
         // console.log('latestReleases: ', latestRelease);
+        let needsToUpdate = false;
         const latestVersion = latestRelease.tag_name.split('-')[0];
-        const needsToUpdate = latestVersion.slice(1) !== version
+
+        let latestExtra = '';
+        const [latestMajor, latestMinor, latestPatch] = latestVersion.split('.');
+        [latestPatch, latestExtra = ''] = latestPatch.split('-');
+
+        let curExtra = '';
+        const [curMajor, curMinor, curPatch] = version.split('.');
+        [curPatch, curExtra = ''] = curPatch.split('-');
+
+        if (Number(latestMajor) > Number(curMajor)) {
+          needsToUpdate = true;
+        } else if (Number(latestMinor) > Number(curMinor)) {
+          needsToUpdate = true;
+        } else if (Number(latestPatch) > Number(curPatch)) {
+          needsToUpdate = true;
+        } else if (latestExtra.length < curExtra.length) {
+          needsToUpdate = true;
+        }
+
         console.log(`Latest Version: ${latestVersion}`);
         console.log(`Current Version: v${version}`);
-        console.log('needs to update?: ', needsToUpdate)
+        console.log('Needs to update?: ', needsToUpdate)
         return needsToUpdate;
       }).catch(e => console.log('ERROR: ', e));
     })
@@ -80,6 +99,7 @@ function App() {
   const showSaveFailureToast = debounce((message) => toast.error('ERROR: Saving \'customsongs.json\' failed.\n' + message), toastDebounce, { maxWait: toastTimeout+1});
   const showSaveSuccessToast = debounce(() => toast.success(`Saved 'customsongs.json' successfully.`), toastDebounce, { maxWait: toastTimeout+1});
   const showDupeSongInSetlistToast = debounce((level) => toast.warn(`Remove the setlist item for the level ${level} and try again.`), toastDebounce, {maxWait: toastTimeout+1});
+  const showEditSuccessToast = debounce((songName) => toast.success(`Track: "${songName}" has been updated in the Setlist.`), toastDebounce, {maxWait: toastTimeout+1});
 
   const saveSetlistToDisk = useCallback(async () => {
     const gameDirPath = encodeURIComponent(curGameDirectory);
@@ -227,7 +247,7 @@ function App() {
               <button className="btn btn-background" onClick={() => {getAvailableMods(); getSetList();}}>Reload All</button>
               {/* {<button onClick={() => {reloadLastSavedSetlist()}}>Load Previous Setlist</button>} */}
               {/* {!!lastSavedSetlist && Object.keys(lastSavedSetlist).length > 0 && <button onClick={() => {setLastSavedSetlist()}}>Load Previous Setlist</button>} */}
-              <SongManager mods={mods} setlist={setlist} curGameDirectory={curGameDirectory} setLastSavedSetlist={setLastSavedSetlist} warningToast={showDupeSongInSetlistToast}/>
+              <SongManager mods={mods} setlist={setlist} curGameDirectory={curGameDirectory} setLastSavedSetlist={setLastSavedSetlist} warningToast={showDupeSongInSetlistToast} showEditSuccessToast={showEditSuccessToast}/>
             </div>
           </div>
           {!isExportOpen && (

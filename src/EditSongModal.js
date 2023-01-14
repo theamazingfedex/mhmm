@@ -5,13 +5,19 @@ import { debounce } from 'lodash';
 
 export default function EditSongModal({ songInfo, isModalOpen, setIsModalOpen, updateSong }) {
 
-  const [customOffset, setCustomOffset] = useState(songInfo.MainMusic.BeatInputOffset || 0.0);
+  const [customOffsetMain, setCustomOffsetMain] = useState(songInfo.MainMusic.BeatInputOffset || 0.0);
+  const [customOffsetBoss, setCustomOffsetBoss] = useState(songInfo.BossMusic.BeatInputOffset || 0.0);
+  const [customBPMMain, setCustomBPMMain] = useState(songInfo.MainMusic.BPM || 0);
+  const [customBPMBoss, setCustomBPMBoss] = useState(songInfo.BossMusic.BPM || 0);
   const [customLevel, setCustomLevel] = useState(songInfo.LevelName || 'Stygia');
   const closeModal = useCallback(() => {
     setIsModalOpen(false);
     setCustomLevel(songInfo.LevelName || 'Stygia');
-    setCustomOffset(songInfo.MainMusic.BeatInputOffset || 0.0);
-  }, [customOffset, customLevel, songInfo]);
+    setCustomOffsetMain(songInfo.MainMusic.BeatInputOffset || 0.0);
+    setCustomOffsetBoss(songInfo.BossMusic.BeatInputOffset || 0.0);
+    setCustomBPMMain(songInfo.MainMusic.BPM || 0);
+    setCustomBPMBoss(songInfo.BossMusic.BPM || 0);
+  }, [customOffsetMain, customLevel, songInfo]);
 
   const clearLevelInput = useCallback((e) => {
     e.target.value = '';
@@ -27,13 +33,28 @@ export default function EditSongModal({ songInfo, isModalOpen, setIsModalOpen, u
       newSong.LevelName = customLevel;
       updated = true;
     }
-    if (Number(songInfo.MainMusic.BeatInputOffset) !== Number(customOffset)) {
+    if (Number(songInfo.MainMusic.BeatInputOffset) !== Number(customOffsetMain)) {
       newSong.MainMusic.oldBeatInputOffset = songInfo.MainMusic.oldBeatInputOffset || songInfo.MainMusic.BeatInputOffset;
-      newSong.MainMusic.BeatInputOffset = customOffset;
+      newSong.MainMusic.BeatInputOffset = customOffsetMain;
       updated = true;
-      if (songInfo.BossMusic.Event === songInfo.MainMusic.Event) {
-        newSong.BossMusic.BeatInputOffset = customOffset;
-      }
+      // if (songInfo.BossMusic.Event === songInfo.MainMusic.Event) {
+      //   newSong.BossMusic.BeatInputOffset = customOffsetMain;
+      // }
+    }
+    if (Number(songInfo.BossMusic.BeatInputOffset) !== Number(customOffsetBoss)) {
+      newSong.MainMusic.oldBeatInputOffset = songInfo.MainMusic.oldBeatInputOffset || songInfo.MainMusic.BeatInputOffset;
+      newSong.MainMusic.BeatInputOffset = customOffsetMain;
+      updated = true;
+    }
+    if (Number(songInfo.MainMusic.BPM) !== Number(customBPMMain)) {
+      newSong.MainMusic.oldBPM = songInfo.MainMusic.oldBPM || songInfo.MainMusic.BPM;
+      newSong.MainMusic.BPM = customBPMMain;
+      updated = true;
+    }
+    if (Number(songInfo.BossMusic.BPM) !== Number(customBPMBoss)) {
+      newSong.BossMusic.oldBPM = songInfo.BossMusic.oldBPM || songInfo.BossMusic.BPM;
+      newSong.BossMusic.BPM = customBPMBoss;
+      updated = true;
     }
     if (updated) {
       // console.log(`Saving: offset: ${customOffset}; level: ${customLevel}!`);
@@ -49,7 +70,7 @@ export default function EditSongModal({ songInfo, isModalOpen, setIsModalOpen, u
       // console.log('oldSong: ', songInfo);
       // console.log('newSong: ', newSong);
     }
-  }, [songInfo, updateSong, customLevel, customOffset]);
+  }, [songInfo, updateSong, customLevel, customOffsetMain, customOffsetBoss, customBPMBoss, customBPMMain]);
 
   const revertSong = useCallback(() => {
     let didUpdate = false;
@@ -58,7 +79,7 @@ export default function EditSongModal({ songInfo, isModalOpen, setIsModalOpen, u
     if (!songInfo.oldLevelName && !songInfo.MainMusic.oldBeatInputOffset) {
       console.log('resetting unset values; songInfo:', songInfo)
       setCustomLevel(songInfo.LevelName);
-      setCustomOffset(songInfo.MainMusic.BeatInputOffset);
+      setCustomOffsetMain(songInfo.MainMusic.BeatInputOffset);
       return;
     }
     if (songInfo.oldLevelName && songInfo.oldLevelName !== songInfo.LevelName) {
@@ -71,10 +92,25 @@ export default function EditSongModal({ songInfo, isModalOpen, setIsModalOpen, u
       songToRevert.MainMusic.oldBeatInputOffset = undefined;
       didUpdate = true;
     }
+    if (songInfo.BossMusic.oldBeatInputOffset && songInfo.BossMusic.oldBeatInputOffset !== songInfo.BossMusic.BeatInputOffset) {
+      songToRevert.BossMusic.BeatInputOffset = songInfo.BossMusic.oldBeatInputOffset;
+      songToRevert.BossMusic.oldBeatInputOffset = undefined;
+      didUpdate = true;
+    }
+    if (songInfo.MainMusic.oldBPM && songInfo.MainMusic.oldBPM !== songInfo.MainMusic.BPM) {
+      songToRevert.MainMusic.BPM = songInfo.MainMusic.oldBPM;
+      songToRevert.MainMusic.oldBPM = undefined;
+      didUpdate = true;
+    }
+    if (songInfo.BossMusic.oldBPM && songInfo.BossMusic.oldBPM !== songInfo.BossMusic.BPM) {
+      songToRevert.BossMusic.BPM = songInfo.BossMusic.oldBPM;
+      songToRevert.BossMusic.oldBPM = undefined;
+      didUpdate = true;
+    }
     if (didUpdate) {
       updateSong(songToRevert)
     }
-  }, [songInfo, updateSong, customLevel, customOffset]);
+  }, [songInfo, updateSong, customLevel, customOffsetMain]);
 
   return (
       <Modal
@@ -85,7 +121,7 @@ export default function EditSongModal({ songInfo, isModalOpen, setIsModalOpen, u
       >
         <div className="modal-content">
           <span className="clear-btn" onClick={closeModal}>X</span>
-          <div className="modal-editor">
+          <div className={`modal-editor ${customLevel.toLowerCase() || songInfo.LevelName.toLowerCase()}-background`}>
             <h1>Editing {songInfo.MainMusic.Bank}</h1>
             <div className="levelName-editor song-editor-item">
               <span className="levelName-label">Level: {songInfo.LevelName}</span>
@@ -106,9 +142,24 @@ export default function EditSongModal({ songInfo, isModalOpen, setIsModalOpen, u
                 />
             </div>
             <div className="offset-editor song-editor-item">
-              <span className="offset-label">Beat Input Offset: {songInfo.MainMusic.BeatInputOffset}</span>
+              <span className="offset-label">MainMusic Beat Input Offset: {songInfo.MainMusic.BeatInputOffset}</span>
               <span className="offset-arrow right-arrow-green">→</span>
-              <input className="editor-input offset-input" type="number" step="0.01" min='-5' max='5' value={customOffset} onChange={(e) => { setCustomOffset(Number(e.target.value)) }}/>
+              <input className="editor-input offset-input" type="number" step="0.01" min='-5' max='5' value={customOffsetMain} onChange={(e) => { setCustomOffsetMain(Number(e.target.value)) }}/>
+            </div>
+            <div className="offset-editor song-editor-item">
+              <span className="offset-label">BossMusic Beat Input Offset: {songInfo.MainMusic.BeatInputOffset}</span>
+              <span className="offset-arrow right-arrow-green">→</span>
+              <input className="editor-input offset-input" type="number" step="0.01" min='-5' max='5' value={customOffsetBoss} onChange={(e) => { setCustomOffsetBoss(Number(e.target.value)) }}/>
+            </div>
+            <div className="offset-editor song-editor-item">
+              <span className="offset-label">MainMusic BPM: {songInfo.MainMusic.BPM}</span>
+              <span className="offset-arrow right-arrow-green">→</span>
+              <input className="editor-input offset-input" type="number" step="1" min='0' max='420' value={customBPMMain} onChange={(e) => { setCustomBPMMain(Number(e.target.value)) }}/>
+            </div>
+            <div className="offset-editor song-editor-item">
+              <span className="offset-label">BossMusic BPM: {songInfo.BossMusic.BPM}</span>
+              <span className="offset-arrow right-arrow-green">→</span>
+              <input className="editor-input offset-input" type="number" step="1" min='0' max='420' value={customBPMBoss} onChange={(e) => { setCustomBPMBoss(Number(e.target.value)) }}/>
             </div>
             {(!!songInfo.oldLevelName || !!songInfo.MainMusic.oldBeatInputOffset) && (
               <button onClick={revertSong}>Revert to Default</button>

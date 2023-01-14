@@ -283,30 +283,57 @@ input[type=search]::-webkit-search-cancel-button {
 .tutorial-background {
   background-image: url('../public/tutorial-background.png') !important;
   background-position: center top 36%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
 }
 .voke-background {
   background-image: url('../public/voke-background.png') !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 .stygia-background {
   background-image: url('../public/stygia-background.png') !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 .incaustis-background {
   background-image: url('../public/incaustis-background.png') !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 .yhelm-background {
   background-image: url('../public/yhelm-background.png') !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 .gehenna-background {
   background-image: url('../public/gehenna-background.png') !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 .nihil-background {
   background-image: url('../public/nihil-background.png') !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 .acheron-background {
   background-image: url('../public/acheron-background.png') !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 .sheol-background {
   background-image: url('../public/sheol-background.png') !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 .toast {
   z-index: 99999 !important;
@@ -575,11 +602,15 @@ input[type=search]::-webkit-search-cancel-button {
   justify-content: space-between;
   max-width: 30em;
   /* max-width: 25%; */
-  padding-top: 1em;
+  /* padding-top: 1em; */
+  padding: 1em 0 1em 1em;
   border-top: 4px solid rgba(70,20,20,0.8);
   margin-bottom: 1em;
   vertical-align: middle;
   line-height: 0;
+
+  background-color: rgba(0,0,0,0.8);
+  border-radius: 15px;
 }
 .right-arrow-green {
   color: green;

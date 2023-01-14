@@ -3,8 +3,9 @@
 [![Github Last Release](https://img.shields.io/github/release-date/theamazingfedex/mhmm?label=last%20release)]()
 # mhmm - Metal: Hellsinger Mod Manager
 A program for managing mods for the game [Metal: Hellsinger](https://www.metalhellsinger.com/modding)
+ 
+ [![Setup tutorial by Bikeborb on YouTube](https://img.youtube.com/vi/CTtDwxt93h8/0.jpg)](https://www.youtube.com/watch?v=CTtDwxt93h8)
  - Setup tutorial by Bikeborb: https://youtu.be/CTtDwxt93h8
-
 ## Requirements:
 1. download the relevant executable from the latest version in [Releases](https://github.com/theamazingfedex/mhmm/releases) and save it your Metal: Hellsinger install directory;
    * Example: `J:\SteamLibrary\steamapps\common\Metal Hellsinger\mhmm-v#.#.#.exe`

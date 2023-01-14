@@ -27,6 +27,13 @@ A program for managing mods for the game [Metal: Hellsinger](https://www.metalhe
 
 
 ___
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
 
 ## Getting Started with Development
 
